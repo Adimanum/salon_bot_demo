@@ -536,7 +536,7 @@ async def cancel_booking(slot_id: int, cancelled_by: str, canceller_tg_id: int) 
             return None
         if cancelled_by == "master" and booking["master_tg_id"] != canceller_tg_id:
             return None
-        if cancelled_by == "client" and booking["client_telegram_id"] != canceller_tg_id:
+        if cancelled_by == "client" and booking["client_telegram_id"] and booking["client_telegram_id"] != canceller_tg_id:
             return None
         await db.execute(
             "UPDATE bookings SET cancelled=1, cancelled_by=? WHERE slot_id=? AND cancelled=0",
